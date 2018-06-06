@@ -1,0 +1,1587 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/6/2018 4:38:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="USTULD0018"
+  DTS:CreatorName="AD\SeaBur"
+  DTS:DTSID="{2B9305DE-D4BE-4C0A-921D-64C59F0ACF5F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="WorkOrderHoursComp"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{F442C248-51B2-499C-B816-D6AFEB6D9128}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[samson.S1049ZKM.apache]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2246F6C0-D822-481A-8057-68F09ECC3E8F}"
+      DTS:ObjectName="samson.S1049ZKM.apache">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=samson;User ID=apache;Initial Catalog=S1049ZKM;Provider=IBMDASQL.DataSource.1;Persist Security Info=True;Force Translate=37;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACSSR4f8O74AveSMdXsAy3IAAAAAASAAACgAAAAEAAAAO/oaY0fQJoISLLGZXwgYZAQAAAAysmZQ4dqp6Jc2kWQOvbmXBQAAABnTjoCGjJykbdE1RiRbBcMF87nIw</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ustull0036\apsreport.Finance.ssis]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{248272E9-3553-4A8A-8F02-22F759EE4016}"
+      DTS:ObjectName="ustull0036\apsreport.Finance.ssis">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ustull0036\apsreport;User ID=ssis;Initial Catalog=Finance;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB29M2WYjoSGKyAYqFgUbREAAAAAASAAACgAAAAEAAAAHlioqV5LuPnuvfA3pgc0Z8YAAAAcjwzdhUfdBGC27bZbIOysOBDdMtC3zRhFAAAAPVUrdUrUEfMISbjsUxqzh8YoUVs</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{481963AD-6FC2-42E4-8420-C20BEBB6AE93}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\APS Report"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="APS Report"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[WorkOrder_Hours]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\APS Report.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ustull0036\apsreport.Finance.ssis]"
+                  connectionManagerRefId="Package.ConnectionManagers[ustull0036\apsreport.Finance.ssis]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLDOCO]"
+                      cachedDataType="numeric"
+                      cachedName="WLDOCO"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDOCO]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDOCO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLDCTO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="WLDCTO"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDCTO]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDCTO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLMMCU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="WLMMCU"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMMCU]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLMMCU]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WASRST]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="WASRST"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WASRST]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WASRST]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLKIT]"
+                      cachedDataType="numeric"
+                      cachedName="WLKIT"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKIT]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLKIT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLKITL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="WLKITL"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKITL]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLKITL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[IMDSC1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="IMDSC1"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC1]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[IMDSC2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="IMDSC2"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC2]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC2]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[IMSRP1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="IMSRP1"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP1]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[IMPRP4]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="IMPRP4"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMPRP4]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMPRP4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[IMSRP4]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="IMSRP4"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP4]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[OPSEQ]"
+                      cachedDataType="numeric"
+                      cachedName="OPSEQ"
+                      cachedPrecision="31"
+                      cachedScale="26"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSEQ]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[OPSEQ]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLOPST]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="WLOPST"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLOPST]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLOPST]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLMCU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="WLMCU"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMCU]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLMCU]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLDSC1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="WLDSC1"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDSC1]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDSC1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLUORG]"
+                      cachedDataType="decimal"
+                      cachedName="WLUORG"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLUORG]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLUORG]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLSOQS]"
+                      cachedDataType="decimal"
+                      cachedName="WLSOQS"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLSOQS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLSOQS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WOHRS]"
+                      cachedDataType="decimal"
+                      cachedName="WOHRS"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WOHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WOHRS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[ACTHRS]"
+                      cachedDataType="decimal"
+                      cachedName="ACTHRS"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[ACTHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[ACTHRS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[RUNMACH]"
+                      cachedDataType="decimal"
+                      cachedName="RUNMACH"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNMACH]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[RUNMACH]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[RUNLAB]"
+                      cachedDataType="decimal"
+                      cachedName="RUNLAB"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNLAB]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[RUNLAB]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[IRTIMB]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="IRTIMB"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTIMB]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IRTIMB]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[SETUP]"
+                      cachedDataType="decimal"
+                      cachedName="SETUP"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[SETUP]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[SETUP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[STDHRS]"
+                      cachedDataType="numeric"
+                      cachedName="STDHRS"
+                      cachedPrecision="31"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[STDHRS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[STDCOMHRS]"
+                      cachedDataType="numeric"
+                      cachedName="STDCOMHRS"
+                      cachedPrecision="31"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDCOMHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[STDCOMHRS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[WLSTRX]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="WLSTRX"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSDATE]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLSTRX]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].Columns[IRTRT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="IRTRT"
+                      externalMetadataColumnId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTRT]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IRTRT]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[ROW_ID]"
+                      dataType="i4"
+                      name="ROW_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDOCO]"
+                      dataType="cy"
+                      name="WLDOCO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDCTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="WLDCTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="WLMMCU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WASRST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="WASRST" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKIT]"
+                      dataType="cy"
+                      name="WLKIT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKITL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="WLKITL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="IMDSC1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="IMDSC2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IMSRP1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMPRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IMPRP4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IMSRP4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSEQ]"
+                      dataType="cy"
+                      name="OPSEQ" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLOPST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="WLOPST" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSDATE]"
+                      dataType="dbDate"
+                      name="OPSDATE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="WLMCU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="WLDSC1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLUORG]"
+                      dataType="cy"
+                      name="WLUORG" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLSOQS]"
+                      dataType="cy"
+                      name="WLSOQS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WOHRS]"
+                      dataType="cy"
+                      name="WOHRS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[ACTHRS]"
+                      dataType="cy"
+                      name="ACTHRS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTRT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IRTRT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNMACH]"
+                      dataType="cy"
+                      name="RUNMACH" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNLAB]"
+                      dataType="cy"
+                      name="RUNLAB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTIMB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IRTIMB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[SETUP]"
+                      dataType="cy"
+                      name="SETUP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDHRS]"
+                      dataType="cy"
+                      name="STDHRS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDCOMHRS]"
+                      dataType="cy"
+                      name="STDCOMHRS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WCTYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="WCTYPE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\APS Report.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\SAMSON"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SAMSON"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+	DISTINCT qgpl.cd(WLSTRX) AS wlstrx,
+	wldoco,
+	wldcto,
+	Wlmmcu,
+	wasrst,
+	wlkit,
+	wlkitl,
+	imdsc1,
+	imdsc2,
+	imsrp1,
+	imprp4,
+	imsrp4,
+	wlopsq / 100 AS OpSeq,
+	Wlopst,
+	wlmcu,
+	wldsc1,
+	wluorg,
+	wlsoqs,
+                   irtrt,
+	(
+		wlrunm + wlrunl
+	)*.01 AS WOHRS,
+	(
+		wlmaca + wllaba
+	)*.01 AS ACTHRS,
+
+ irrunm *.01 AS RunMach,
+	irrunl *.01 AS RunLab,
+	irtimb AS IRTIMB,
+	irsetl *.01 AS setup,
+	(
+		(
+			irrunm + irrunl
+		)*(
+			WLuorg *.01
+		)
+	)* CASE
+		WHEN irtimb = 'U' THEN 1
+		WHEN irtimb = '1' THEN.1
+		WHEN irtimb = '2' THEN.01
+		WHEN irtimb = '3' THEN.001
+		WHEN irtimb = '4' THEN.0001
+	END AS STDHRS,
+	(
+		(
+			irrunm + irrunl
+		)*(
+			WLsoqs *.01
+		)
+	)* CASE
+		WHEN irtimb = 'U' THEN 1
+		WHEN irtimb = '1' THEN.1
+		WHEN irtimb = '2' THEN.01
+		WHEN irtimb = '3' THEN.001
+		WHEN irtimb = '4' THEN.0001
+	END AS StdComHrs,
+	imsrp5
+FROM
+	amsdta.F3112LA
+LEFT JOIN amsdta.F30008 ON
+	iwmcu = WLMCU
+LEFT JOIN amsdta.F3003LA ON
+	irkit = WLKIT
+	AND iropsq = WLOPSQ
+	AND irmcu = WLMCU
+	AND WLNXOP = irnxop
+	AND irtrt = WLTRT
+LEFT JOIN amsdta.f4801 ON
+	wadoco = WLDOCO
+LEFT JOIN amsdta.F4101 ON
+	imitm = WLKIT
+WHERE
+	WLSTRX &gt;=  ( 
+	(substr(year(current date - 6 DAYS),2,1)+1) || 
+	substr(year(current date - 6 DAYS),3,2) || 
+	(CASE 	WHEN dayofyear(current date - 6 DAYS) &gt; 99 THEN ('' || dayofyear(current date - 6 DAYS))
+	 	WHEN dayofyear(current date - 6 DAYS) &gt; '9'   THEN ('0' || dayofyear(current date - 6 DAYS))
+		ELSE ('00' || dayofyear(current date - 6 DAYS))
+	END )
+)
+	AND TRIM( WLMCU ) IN(
+		'52003',
+		'52004',
+		'52005',
+		'52006',
+		'92003',
+		'53001',
+		'53002',
+		'53002C',
+		'53003',
+		'53004',
+		'93001',
+		'93002',
+		'93003',
+		'53011',
+		'54011',
+		'54012',
+		'54013',
+		'54014',
+		'54017',
+		'54017A',
+		'54017B',
+		'54017C',
+		'54018',
+		'54018A',
+		'54018B',
+		'54018C',
+		'54020',
+		'54021',
+		'54022',
+		'54023',
+		'54024',
+		'54025',
+		'54026',
+		'94013',
+		'94014',
+		'94017',
+		'94021',
+		'54019',
+		'55001',
+		'55002',
+		'55003',
+		'55004',
+		'55005',
+		'55006',
+		'55007',
+		'55008',
+		'55010',
+		'55011',
+		'55012',
+		'55099',
+		'95502',
+		'95002',
+		'55501',
+		'55502',
+		'55503',
+		'55504',
+		'55505',
+		'55506',
+		'55511',
+		'56001',
+		'56002',
+		'56003',
+		'56003A',
+		'56004',
+		'56005',
+		'56006',
+		'56007',
+		'56008',
+		'56009',
+		'96001',
+		'96003',
+		'96004',
+		'96005',
+		'56577',
+		'56578',
+		'56579',
+		'58001',
+		'58090',
+		'58091',
+		'58092',
+		'58094',
+		'58095',
+		'58096',
+		'58097',
+		'58098',
+		'58099',
+		'98090',
+		'98091',
+		'59501',
+		'59502',
+		'59503',
+		'59504',
+		'59505',
+		'59506',
+		'59507',
+		'59508',
+		'59509',
+		'59510',
+		'59511',
+		'99503',
+		'99504',
+		'99505',
+		'57001',
+		'57002',
+		'57003',
+		'57004',
+		'57005',
+		'57006',
+		'57007',
+		'97001',
+		'97002',
+		'97003',
+		'97004',
+		'57601',
+		'57602',
+		'57603',
+		'57604',
+		'57605',
+		'57606',
+		'57607',
+		'97601',
+		'97602',
+		'97603',
+		'97607',
+		'57301',
+		'57701',
+		'57702',
+		'57703',
+		'97702',
+		'58002',
+		'58003',
+		'58004',
+		'58005',
+		'58006',
+		'58011',
+		'58012',
+		'98001',
+		'98002',
+		'98004',
+		'98011',
+		'98012',
+		'51101',
+		'20101',
+		'59777',
+		'70077',
+		'41077',
+		'42077',
+		'43077',
+		'67177',
+		'67377',
+		'67477',
+		'67577',
+		'67677',
+		'67777',
+		'67877'
+	)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\SAMSON.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[samson.S1049ZKM.apache]"
+                  connectionManagerRefId="Package.ConnectionManagers[samson.S1049ZKM.apache]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLSTRX]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSTRX]"
+                      length="10"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLSTRX]"
+                      name="WLSTRX"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDOCO]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDOCO]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDOCO]"
+                      name="WLDOCO"
+                      precision="8"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDCTO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDCTO]"
+                      length="2"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDCTO]"
+                      name="WLDCTO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLMMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMMCU]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLMMCU]"
+                      name="WLMMCU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WASRST]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WASRST]"
+                      length="2"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WASRST]"
+                      name="WASRST"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLKIT]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKIT]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLKIT]"
+                      name="WLKIT"
+                      precision="8"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLKITL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKITL]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLKITL]"
+                      name="WLKITL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC1]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC1]"
+                      name="IMDSC1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC2]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC2]"
+                      name="IMDSC2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP1]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP1]"
+                      name="IMSRP1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMPRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMPRP4]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMPRP4]"
+                      name="IMPRP4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP4]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP4]"
+                      name="IMSRP4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[OPSEQ]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[OPSEQ]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[OPSEQ]"
+                      name="OPSEQ"
+                      precision="31"
+                      scale="26"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLOPST]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLOPST]"
+                      length="2"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLOPST]"
+                      name="WLOPST"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMCU]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLMCU]"
+                      name="WLMCU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDSC1]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLDSC1]"
+                      name="WLDSC1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLUORG]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLUORG]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLUORG]"
+                      name="WLUORG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLSOQS]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSOQS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WLSOQS]"
+                      name="WLSOQS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WOHRS]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WOHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[WOHRS]"
+                      name="WOHRS"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[ACTHRS]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[ACTHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[ACTHRS]"
+                      name="ACTHRS"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[RUNMACH]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNMACH]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[RUNMACH]"
+                      name="RUNMACH"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[RUNLAB]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNLAB]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[RUNLAB]"
+                      name="RUNLAB"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IRTIMB]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTIMB]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IRTIMB]"
+                      name="IRTIMB"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[SETUP]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[SETUP]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[SETUP]"
+                      name="SETUP"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[STDHRS]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[STDHRS]"
+                      name="STDHRS"
+                      precision="31"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[STDCOMHRS]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDCOMHRS]"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[STDCOMHRS]"
+                      name="STDCOMHRS"
+                      precision="31"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP5]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP5]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP5]"
+                      name="IMSRP5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IRTRT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTRT]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].Columns[IRTRT]"
+                      name="IRTRT"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSTRX]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="WLSTRX" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDOCO]"
+                      dataType="numeric"
+                      name="WLDOCO"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDCTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="WLDCTO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="WLMMCU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WASRST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="WASRST" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKIT]"
+                      dataType="numeric"
+                      name="WLKIT"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKITL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="WLKITL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="IMDSC1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="IMDSC2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IMSRP1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMPRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IMPRP4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IMSRP4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[OPSEQ]"
+                      dataType="numeric"
+                      name="OPSEQ"
+                      precision="31"
+                      scale="26" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLOPST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="WLOPST" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="WLMCU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="WLDSC1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLUORG]"
+                      dataType="decimal"
+                      name="WLUORG" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSOQS]"
+                      dataType="decimal"
+                      name="WLSOQS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WOHRS]"
+                      dataType="decimal"
+                      name="WOHRS"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[ACTHRS]"
+                      dataType="decimal"
+                      name="ACTHRS"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNMACH]"
+                      dataType="decimal"
+                      name="RUNMACH"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNLAB]"
+                      dataType="decimal"
+                      name="RUNLAB"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTIMB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IRTIMB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[SETUP]"
+                      dataType="decimal"
+                      name="SETUP"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDHRS]"
+                      dataType="numeric"
+                      name="STDHRS"
+                      precision="31"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDCOMHRS]"
+                      dataType="numeric"
+                      name="STDCOMHRS"
+                      precision="31"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IMSRP5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTRT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="IRTRT" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSTRX]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSTRX]"
+                      name="WLSTRX" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDOCO]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDOCO]"
+                      name="WLDOCO"
+                      precision="8" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDCTO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDCTO]"
+                      name="WLDCTO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMMCU]"
+                      name="WLMMCU" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WASRST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WASRST]"
+                      name="WASRST" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKIT]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKIT]"
+                      name="WLKIT"
+                      precision="8" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKITL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKITL]"
+                      name="WLKITL" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC1]"
+                      name="IMDSC1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC2]"
+                      name="IMDSC2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP1]"
+                      name="IMSRP1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMPRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMPRP4]"
+                      name="IMPRP4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP4]"
+                      name="IMSRP4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[OPSEQ]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[OPSEQ]"
+                      name="OPSEQ"
+                      precision="31"
+                      scale="26" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLOPST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLOPST]"
+                      name="WLOPST" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMCU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMCU]"
+                      name="WLMCU" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDSC1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDSC1]"
+                      name="WLDSC1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLUORG]"
+                      dataType="decimal"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLUORG]"
+                      name="WLUORG" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSOQS]"
+                      dataType="decimal"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSOQS]"
+                      name="WLSOQS" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTRT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTRT]"
+                      name="IRTRT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WOHRS]"
+                      dataType="decimal"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[WOHRS]"
+                      name="WOHRS"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[ACTHRS]"
+                      dataType="decimal"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[ACTHRS]"
+                      name="ACTHRS"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNMACH]"
+                      dataType="decimal"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNMACH]"
+                      name="RUNMACH"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNLAB]"
+                      dataType="decimal"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNLAB]"
+                      name="RUNLAB"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTIMB]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTIMB]"
+                      name="IRTIMB" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[SETUP]"
+                      dataType="decimal"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[SETUP]"
+                      name="SETUP"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDHRS]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDHRS]"
+                      name="STDHRS"
+                      precision="31"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDCOMHRS]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDCOMHRS]"
+                      name="STDCOMHRS"
+                      precision="31"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP5]"
+                      name="IMSRP5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\APS Report.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\SAMSON.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="130,67" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Data Flow Task\SAMSON"
+          TopLeft="160,55" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Data Flow Task\APS Report"
+          TopLeft="326,172" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="220,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="172,75"
+              Start="0,0"
+              End="172,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="4,37.5" />
+                  <mssgle:LineSegment
+                    End="168,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="168,37.5"
+                    Point2="172,37.5"
+                    Point3="172,41.5" />
+                  <mssgle:LineSegment
+                    End="172,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SAMSON">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\APS Report">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
