@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="WorkOrderHoursComp"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{10E7E146-382E-4899-8F4D-3011F206459D}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{286B99E7-FAE0-48CB-8724-D100A756BC58}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB8R8luAtPe8tDXPWVhyC9+AAAAAASAAACgAAAAEAAAACsob/8o1A9f+I/gokzQ0DgQAAAAGrRtpCAx7jkcmpTOMVUr2xQAAABNwdtqrAMAyU4avR/Gy/VuXUjSdA</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADtGi4y1vsI2WahkFxNCR/LAAAAAASAAACgAAAAEAAAACdJY3M2Vh6/QaWYXx6k2jcQAAAAd8IJ7XuCX0BkGd9wyK3j9BQAAACEhzziryqFu14yOJ4hy2JsEH/Gmg</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,7 +42,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADT2Zjn1PXz83YG6pn9rX6LAAAAAASAAACgAAAAEAAAALOG1LWZG7jluwtvCsnAnkIYAAAAhIVxvYXrqRNu3c5jp5fW/DJwTBEVpwTcFAAAAM9WHy4jcNovYxgb4LqXs0Ocic+O</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABgakesJeeJPculQlXl069gAAAAAASAAACgAAAAEAAAAKnUcwpF4vb49TF4l6KI9pcYAAAAiejMwrrzZNSlHU8jtv/3I5Qgf9uBhyRGFAAAAEp730YWVyWx5ZJn2SFvc7b77F3X</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1506,7 +1506,7 @@ WHERE
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{248272E9-3553-4A8A-8F02-22F759EE4016}"
-          SQLTask:SqlStatementSource="&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;update WorkOrder_Hours   --table being updated&#xA;&#xA;set WCTYPE = t.WorkCenterType&#xA;     &#xA;       --column(s) being updated from the columns in other table that are updating&#xA;&#xA;from WorkOrder_Hours d&#x9; --table being updated&#xA;&#xA;inner join Meta_Data.dbo.Meta_WorkCenter t on t.WorkCenterNum = d.WLMCU  --join the tables&#xA;&#xA;where d.WLMCU = t.WorkCenterNum    --constraints&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;update WorkOrder_Hours   --table being updated&#xA;&#xA;set WCTYPE=t.WorkCenterType&#xA;       --column(s) being updated from the columns in other table that are updating&#xA;&#xA;from WorkOrder_Hours d&#x9; --table being updated&#xA;&#xA;inner join Meta_Data.dbo.Meta_WorkCenter t on t.WorkCenterNum = d.WLMCU  --join the tables&#xA;&#xA;where d.WLMCU = t.WorkCenterNum    --constraints&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
