@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="WorkOrderHoursComp"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{F442C248-51B2-499C-B816-D6AFEB6D9128}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{10E7E146-382E-4899-8F4D-3011F206459D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACSSR4f8O74AveSMdXsAy3IAAAAAASAAACgAAAAEAAAAO/oaY0fQJoISLLGZXwgYZAQAAAAysmZQ4dqp6Jc2kWQOvbmXBQAAABnTjoCGjJykbdE1RiRbBcMF87nIw</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB8R8luAtPe8tDXPWVhyC9+AAAAAASAAACgAAAAEAAAACsob/8o1A9f+I/gokzQ0DgQAAAAGrRtpCAx7jkcmpTOMVUr2xQAAABNwdtqrAMAyU4avR/Gy/VuXUjSdA</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,7 +42,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB29M2WYjoSGKyAYqFgUbREAAAAAASAAACgAAAAEAAAAHlioqV5LuPnuvfA3pgc0Z8YAAAAcjwzdhUfdBGC27bZbIOysOBDdMtC3zRhFAAAAPVUrdUrUEfMISbjsUxqzh8YoUVs</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADT2Zjn1PXz83YG6pn9rX6LAAAAAASAAACgAAAAEAAAALOG1LWZG7jluwtvCsnAnkIYAAAAhIVxvYXrqRNu3c5jp5fW/DJwTBEVpwTcFAAAAM9WHy4jcNovYxgb4LqXs0Ocic+O</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -557,7 +557,7 @@
 	imsrp4,
 	wlopsq / 100 AS OpSeq,
 	Wlopst,
-	wlmcu,
+	trim(wlmcu) as wlmcu,
 	wldsc1,
 	wluorg,
 	wlsoqs,
@@ -1492,7 +1492,34 @@ WHERE
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FEB038BB-FB0C-4EE2-B85C-5DC0DC603AD3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{248272E9-3553-4A8A-8F02-22F759EE4016}"
+          SQLTask:SqlStatementSource="&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;update WorkOrder_Hours   --table being updated&#xA;&#xA;set WCTYPE = t.WorkCenterType&#xA;     &#xA;       --column(s) being updated from the columns in other table that are updating&#xA;&#xA;from WorkOrder_Hours d&#x9; --table being updated&#xA;&#xA;inner join Meta_Data.dbo.Meta_WorkCenter t on t.WorkCenterNum = d.WLMCU  --join the tables&#xA;&#xA;where d.WLMCU = t.WorkCenterNum    --constraints&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B01F4195-6D7B-4735-97C1-EDC8DF3B17B7}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -1504,11 +1531,49 @@ WHERE
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="151,42"
           Id="Package\Data Flow Task"
           TopLeft="130,67" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="186,183" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="205.5,109">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="62,74"
+              Start="0,0"
+              End="62,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33"
+                    Point2="0,37"
+                    Point3="4,37" />
+                  <mssgle:LineSegment
+                    End="58,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58,37"
+                    Point2="62,37"
+                    Point3="62,41" />
+                  <mssgle:LineSegment
+                    End="62,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1563,14 +1628,6 @@ WHERE
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\SAMSON">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\APS Report">
     <Properties>
       <Property>
@@ -1580,6 +1637,14 @@ WHERE
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SAMSON">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
