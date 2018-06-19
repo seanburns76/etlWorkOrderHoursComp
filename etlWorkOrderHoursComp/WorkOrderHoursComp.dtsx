@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="WorkOrderHoursComp"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{286B99E7-FAE0-48CB-8724-D100A756BC58}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{73C4C351-4760-43D1-BCE4-00B106631847}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADtGi4y1vsI2WahkFxNCR/LAAAAAASAAACgAAAAEAAAACdJY3M2Vh6/QaWYXx6k2jcQAAAAd8IJ7XuCX0BkGd9wyK3j9BQAAACEhzziryqFu14yOJ4hy2JsEH/Gmg</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAdODe3dkdNdZhxcORshZ83AAAAAASAAACgAAAAEAAAAFgZ3pb29QDw4GBA6RcKUg4QAAAA+nWsECYRGdG82TQykW744RQAAAB6uUhgeFLZJkwZEtQlIHCqTS6Zcw</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,7 +42,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABgakesJeeJPculQlXl069gAAAAAASAAACgAAAAEAAAAKnUcwpF4vb49TF4l6KI9pcYAAAAiejMwrrzZNSlHU8jtv/3I5Qgf9uBhyRGFAAAAEp730YWVyWx5ZJn2SFvc7b77F3X</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADxIaLkvGV/gOSeeMJ30jFNAAAAAASAAACgAAAAEAAAACWJmwe4OW1+FmDtKlycLbQYAAAAuYbSNSy0DULFXWj8mIAb9mDO4MhwS+BsFAAAAM22jsYrpIfzlMeGgPdfO++26YiO</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -1533,11 +1533,11 @@ WHERE
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151,42"
+          Size="151.2,41.6"
           Id="Package\Data Flow Task"
           TopLeft="130,67" />
         <NodeLayout
-          Size="163,42"
+          Size="163.2,41.6"
           Id="Package\Execute SQL Task"
           TopLeft="186,183" />
         <EdgeLayout
@@ -1583,11 +1583,11 @@ WHERE
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="120,42"
+          Size="120,41.6"
           Id="Package\Data Flow Task\SAMSON"
           TopLeft="160,55" />
         <NodeLayout
-          Size="132,42"
+          Size="132,41.6"
           Id="Package\Data Flow Task\APS Report"
           TopLeft="326,172" />
         <EdgeLayout
