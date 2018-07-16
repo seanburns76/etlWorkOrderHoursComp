@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="WorkOrderHoursComp"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{6BDC8D4A-7250-4D98-ABE5-693EA831BEA0}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{DCE523F1-9232-45B0-A1EF-F56218A2A176}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,7 +27,7 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADX4q5YK0VGi306Nm8URqH+AAAAAASAAACgAAAAEAAAABCAI27Db0xLx7hoXghA+6YQAAAAJcceK3kCw6dhFV2poA6qoxQAAAAIdZKdC5s87nJhrKA7b/I6dq2cyg</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACCyzqQy4asi+G7hyFINKpRAAAAAASAAACgAAAAEAAAAEZzPCj60WYOwIw0eOSiHmgQAAAAjsPtQj797EyY+ynHQRlELRQAAAA4CalGe6Mo9m8ByVTx8O91bgNQrQ</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -42,30 +42,13 @@
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACBloN7mzfSivUulQYylfz0AAAAAASAAACgAAAAEAAAABVYDJm6yANQQ5Q/tnVToKEYAAAAate40apZmCN/FU/QJO4kz6xUo9zyjeRmFAAAAFYGZx4NM8Z9xSoYuB8/gS96Vq4G</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADgUCgqE4G0ijw9DdmO7pfwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADwjoCAjGE4i0IymdhOVLbkAAAAAASAAACgAAAAEAAAAOo24teeMP2D7k3qKbFpDKcYAAAAq5LQm67qCd2t249IzWLpnEbbwHu9ci6iFAAAAOkJbOhRE1gW9OTIf0bN68irFOTB</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{FEB038BB-FB0C-4EE2-B85C-5DC0DC603AD3}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{248272E9-3553-4A8A-8F02-22F759EE4016}"
-          SQLTask:SqlStatementSource="&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;update WorkOrder_Hours   --table being updated&#xA;&#xA;set WCTYPE=t.WorkCenterType&#xA;       --column(s) being updated from the columns in other table that are updating&#xA;&#xA;from WorkOrder_Hours d&#x9; --table being updated&#xA;&#xA;inner join Meta_Data.dbo.Meta_WorkCenter t on t.WorkCenterNum = d.WLMCU  --join the tables&#xA;&#xA;where d.WLMCU = t.WorkCenterNum    --constraints&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\New Work Order Hours"
       DTS:CreationName="Microsoft.Pipeline"
@@ -80,827 +63,6 @@
         <pipeline
           version="1">
           <components>
-            <component
-              refId="Package\New Work Order Hours\JDE"
-              componentClassID="Microsoft.OLEDBSource"
-              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
-              description="OLE DB Source"
-              name="JDE"
-              usesDispositions="true"
-              version="7">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from
-(
-SELECT distinct
-          QGPL.cd( wlstrx )         AS "OpsDate"        ,
-          trim(VARCHAR( WLMCU, 30, 37 ))  AS "WorkCenter"     ,
-          IMDSC1                    AS "WorkCenterDesc",
-          WLDOCO 					AS "OrderNumber",
-          VARCHAR( imlitm, 20, 37 ) AS "PARTNUMBER"     ,
-          WLOPSQ * .01				AS "OPSSequence",
-          ( imdsc1
-                    || '-'
-                    || imdsc2 )   AS "PARTDESC"      ,
-          VARCHAR( wluom, 3, 37 ) AS "UNITOFMEASURE",
-          WLSETL *.01             AS "STANDARDSETUP",
-         sum (
-                    CASE
-                              WHEN wttyr = '2'
-                                        THEN wthrw
-                                        ELSE 0
-                    END
-          )
-          *.01                                                              AS "ACTUALSETUP"       ,
-          DECIMAL(( WLRUNM *.01 ), 15, 2 )                                  AS "STANDARDRUNMACHINE",				--from F3112     
-          DECIMAL(( WLRUNL *.01 ), 15, 2 )                                  AS "STANDARDRUNLABOR"  ,				--from F3112
-          DECIMAL(( WLMACA *.01 ), 15, 2 )                                  AS "ACTUALRUNMACHINE"  ,				--from F3112
-          DECIMAL(( WLLABA *.01 ), 15, 2 )                                  AS "ACTUALRUNLABOR"    ,				--from F3112
-          DECIMAL(( WLSOQS / WLUORG ), 15, 2 )                              AS "STANCALCRATIO"     ,				--from F3112
-
-          WLUORG                                                            AS "REQUESTEDQTY"       ,
-          WLSOQS                                                            AS "SHIPQTY"            ,
-		  DECIMAL((IRRUNL * .01), 15, 2)									AS "PlannedRunLabor"	,				--From f3003
-		  DECIMAL((IRRUNM * .01), 15, 2)									As "PlannedRunMachine",				--from f3003
-		  DECIMAL (((wlrunm + wlrunl)*.01),15,2)							AS WOHRS,
-		  DECIMAL (((wlmaca + wllaba)*.01),15,2)							AS ACTHRS,
-		  DECIMAL (((irrunm + irrunl))*.01,15,2)							AS StdHrs,
-		  DECIMAL (((irrunm + irrunl)* (wlsoqs/wluorg))*.01,15,2) 			AS StdComHrs
-/*
-
-RunMach = irRUMM
-RunLab  = irRUNL
-Set-Up  = irSETL
-WOHRS   = wlRUNM + wlRUNL * .01
-ACTHRS  = wlMACA + wlLABA * .01
-StdHrs  = RunMach + RunLab * wlUORG * .01
-StdComHrs = RunMach + RunLab * wlSOQS * .01
-
-
-Standard Hours:
-Mach Hrs - Sum of St MACHINE	
-				St Machine = If "Standard Run Machine" = 0 then 0 else STDCOMHRS
-					STDCOMHRS  = "Standard Run Machine" + "Standard Run Labor" x "Stan Calc Ratio" 
-Lab Hrs - Sum of St Labor	
-				St Machine = If "Standard Run Labor" = 0 then 0 else STDCOMHRS
-					STDCOMHRS  = "Standard Run Machine" + "Standard Run Labor" x "Stan Calc Ratio"	
-					
-
-Actual Hours:
-Mach Hrs - Sum of Ac Machine 
-				Ac Machine = If WorkCenter Type = "Machine" then ACTHRS else 0			***Workcenter Type is a hard coded value derived from workcenter ie-either a labor function or machine function
-					ACTHRS = "Actual Run Machine" + "Actual Run Labor" 
-Lab Hrs - Sum of Ac Labor 
-				Ac Machine = If WorkCenter Type = "Labor" then ACTHRS else 0
-					ACTHRS = "Actual Run Machine" + "Actual Run Labor"		
-Ac Labor WO Hours - If IMSRP4 or IMPRP4 = "LBR" then "Actual Run Machine" + "Actual Run Labor"	
-Set-Up Hours - "Actual Set-Up"	
-Avg Crew Size - Seamless Average(Crew) by workcenter for the week where crew &gt; 0
-
-Planned Hours:
-Mach Hrs - Sum of Pl Machine 
-				Pl Machine = If "Planned Run Machine" = 0 then 0 else WOHRS 			***Workcenter Type is a hard coded value derived from workcenter ie-either a labor function or machine function
-					WOHRS = "Planned Run Machine" + "Planned Run Labor" 
-Lab Hrs - Sum of Pl Labor 
-				Pl Machine = If "Planned Run Labor" = 0 then 0 else WOHRS
-					WOHRS = "Planned Run Machine" + "Planned Run Labor"		
-Pl Labor WO Hours - If IMSRP4 or IMPRP4 = "LBR" then "Plannd Run Machine" + "Planned Run Labor"	
-Set-Up Hours - "Actual Set-Up"	
-Avg Crew Size - Seamless Average(Crew) by workcenter for the week where crew &gt; 0
-
-
-*/
-					
-
-		  
-FROM
-          amsdta.f3112 --Shop Floor Routing Instructions
-          LEFT JOIN
-                    amsdta.F3003 --Join to Routing master to get standards
-                    ON
-                              --&gt;&gt;&gt;Below joins help in removing dupes
-                              irmmcu     = WLMMCU --Join on Location
-                              AND irmcu  = WLMCU  --Join on WorkCenter
-                              AND iropsq = WLOPSQ --Join on Operations Sequence
-                              AND irkit  = WLKIT  --Join on Item Number
-          LEFT JOIN
-                    amsdta.f31122 --join to work order time transactions
-                    ON
-                              wtdoco     = wldoco --join on work order
-                              AND wtdcto = wldcto --join on doc type
-                              AND wtopsq = wlopsq --join on sequence
-                              AND wttyr IN( 1,
-                                           2 ,
-                                           3 ) --Hour types
-          LEFT JOIN
-                    amsdta.f41002 --Conversion table to get accurate counts for each item
-                    ON
-                              umitm     = wlkit
-                              AND umum  = wluom
-                              AND umrum = 'FT'
-         LEFT JOIN
-                    amsdta.f4101 --join Item master to get meta data for parts
-                    ON
-                              imitm = wlkit
-        LEFT   JOIN
-                    amsdta.f4801 --work order master
-                    ON
-                              wadoco     = wldoco
-                              AND wadcto = wldcto
-WHERE
-	WLSTRX &gt;= 118169 AND WLSTRX &lt;= 118175
-          --wldoco = 1025110 
-          --        qgpl.cd(wlstrx) &gt;= '2018-06-18'
-          --  AND qgpl.cd(wlstrx) &lt;= '2018-06-24'
-          AND TRIM( wlmcu ) IN( '59506', --only retrieve data for work centers in legacy report
-                               '59502' ,
-                               '59501' ,
-                               '55503' ,
-                               '57601' ,
-                               '55506' ,
-                               '97607' ,
-                               '57006' ,
-                               '57301' ,
-                               '58094' ,
-                               '58095' ,
-                               '51101' ,
-                               '57007' ,
-                               '57606' ,
-                               '57001' ,
-                               '54024' ,
-                               '57607' ,
-                               '57303' ,
-                               '54014' ,
-                               '58001' ,
-                               '97602' ,
-                               '58004' ,
-                               '57603' ,
-                               '58003' ,
-                               '57401' ,
-                               '67777' ,
-                               '58011' ,
-                               '57304' ,
-                               '55003' ,
-                               '55008' ,
-                               '53002' ,
-                               '57602' ,
-                               '58002' ,
-                               '57306' ,
-                               '57305' ,
-                               '56005' ,
-                               '58092' ,
-                               '54018A',
-                               '54020' ,
-                               '53001' ,
-                               '58006' ,
-                               '55001' ,
-                               '55004' ,
-                               '55007' ,
-                               '54017A',
-                               '56004' ,
-                               '57003' ,
-                               '56001' ,
-                               '54018C',
-                               '54025' ,
-                               '57302' ,
-                               '54012' ,
-                               '56579' ,
-                               '58091' ,
-                               '54013' ,
-                               '54017B',
-                               '55511' ,
-                               '54018B',
-                               '52004' ,
-                               '58096' ,
-                               '55502' ,
-                               '55505' ,
-                               '56002' ,
-                               '52005' ,
-                               '55002' ,
-                               '56003' ,
-                               '43077' ,
-                               '67577' ,
-                               '56006' ,
-                               '58012' ,
-                               '56003A',
-                               '59503' ,
-                               '59505' ,
-                               '56007' ,
-                               '59511' ,
-                               '20101' ,
-                               '52003' ,
-                               '53003' ,
-                               '53004' ,
-                               '54022' ,
-                               '58099' ,
-                               '58090' ,
-                               '52003C',
-                               '56577' ,
-                               '53001C',
-                               '54027' ,
-                               '52004C',
-                               '52005C',
-                               '57005' ,
-                               '54017C',
-                               '57002' )
-GROUP BY
-          wlstrx,
-          wlmcu ,
-          wldoco,
-          --waprts,
-          --wldcto,
-          wluorg,
-          wluom ,
-          wlsoqs,
-          --wlsocn,
-          wlopsq,
-          wlrunl,
-          wlrunm,
-          wlsetl,
-          --wlupmj,
-          imlitm,
-          imdsc1,
-          imdsc2,
-          --umconv,
-          irrunm,
-          irrunl,
-          wlmaca,
-          wllaba) x</property>
-                <property
-                  dataType="System.String"
-                  description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">2</property>
-                <property
-                  dataType="System.String"
-                  description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\New Work Order Hours\JDE.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[samson.S1049ZKM.apache]"
-                  connectionManagerRefId="Package.ConnectionManagers[samson.S1049ZKM.apache]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <outputs>
-                <output
-                  refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output]"
-                  name="OLE DB Source Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;OpsDate&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;OpsDate&quot;]"
-                      length="10"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;OpsDate&quot;]"
-                      name="&quot;OpsDate&quot;"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;WorkCenter&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;WorkCenter&quot;]"
-                      length="30"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;WorkCenter&quot;]"
-                      name="&quot;WorkCenter&quot;"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;WorkCenterDesc&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;WorkCenterDesc&quot;]"
-                      length="30"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;WorkCenterDesc&quot;]"
-                      name="&quot;WorkCenterDesc&quot;"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;OrderNumber&quot;]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;OrderNumber&quot;]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;OrderNumber&quot;]"
-                      name="&quot;OrderNumber&quot;"
-                      precision="8"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[PARTNUMBER]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[PARTNUMBER]"
-                      length="20"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[PARTNUMBER]"
-                      name="PARTNUMBER"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;OPSSequence&quot;]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;OPSSequence&quot;]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;OPSSequence&quot;]"
-                      name="&quot;OPSSequence&quot;"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[PARTDESC]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[PARTDESC]"
-                      length="61"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[PARTDESC]"
-                      name="PARTDESC"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[UNITOFMEASURE]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[UNITOFMEASURE]"
-                      length="3"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[UNITOFMEASURE]"
-                      name="UNITOFMEASURE"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANDARDSETUP]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANDARDSETUP]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANDARDSETUP]"
-                      name="STANDARDSETUP"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTUALSETUP]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTUALSETUP]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTUALSETUP]"
-                      name="ACTUALSETUP"
-                      precision="31"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANDARDRUNMACHINE]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANDARDRUNMACHINE]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANDARDRUNMACHINE]"
-                      name="STANDARDRUNMACHINE"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANDARDRUNLABOR]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANDARDRUNLABOR]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANDARDRUNLABOR]"
-                      name="STANDARDRUNLABOR"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTUALRUNMACHINE]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTUALRUNMACHINE]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTUALRUNMACHINE]"
-                      name="ACTUALRUNMACHINE"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTUALRUNLABOR]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTUALRUNLABOR]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTUALRUNLABOR]"
-                      name="ACTUALRUNLABOR"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANCALCRATIO]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANCALCRATIO]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STANCALCRATIO]"
-                      name="STANCALCRATIO"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[REQUESTEDQTY]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[REQUESTEDQTY]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[REQUESTEDQTY]"
-                      name="REQUESTEDQTY"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[SHIPQTY]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[SHIPQTY]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[SHIPQTY]"
-                      name="SHIPQTY"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;PlannedRunLabor&quot;]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;PlannedRunLabor&quot;]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;PlannedRunLabor&quot;]"
-                      name="&quot;PlannedRunLabor&quot;"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;PlannedRunMachine&quot;]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;PlannedRunMachine&quot;]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[&quot;PlannedRunMachine&quot;]"
-                      name="&quot;PlannedRunMachine&quot;"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[WOHRS]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[WOHRS]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[WOHRS]"
-                      name="WOHRS"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTHRS]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTHRS]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[ACTHRS]"
-                      name="ACTHRS"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STDHRS]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STDHRS]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STDHRS]"
-                      name="STDHRS"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STDCOMHRS]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STDCOMHRS]"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].Columns[STDCOMHRS]"
-                      name="STDCOMHRS"
-                      scale="2"
-                      truncationRowDisposition="FailComponent" />
-                  </outputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;OpsDate&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      length="10"
-                      name="&quot;OpsDate&quot;" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;WorkCenter&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="&quot;WorkCenter&quot;" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;WorkCenterDesc&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="&quot;WorkCenterDesc&quot;" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;OrderNumber&quot;]"
-                      dataType="numeric"
-                      name="&quot;OrderNumber&quot;"
-                      precision="8" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[PARTNUMBER]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="PARTNUMBER" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;OPSSequence&quot;]"
-                      dataType="decimal"
-                      name="&quot;OPSSequence&quot;"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[PARTDESC]"
-                      codePage="1252"
-                      dataType="str"
-                      length="61"
-                      name="PARTDESC" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[UNITOFMEASURE]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="UNITOFMEASURE" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANDARDSETUP]"
-                      dataType="decimal"
-                      name="STANDARDSETUP"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTUALSETUP]"
-                      dataType="numeric"
-                      name="ACTUALSETUP"
-                      precision="31"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANDARDRUNMACHINE]"
-                      dataType="decimal"
-                      name="STANDARDRUNMACHINE"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANDARDRUNLABOR]"
-                      dataType="decimal"
-                      name="STANDARDRUNLABOR"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTUALRUNMACHINE]"
-                      dataType="decimal"
-                      name="ACTUALRUNMACHINE"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTUALRUNLABOR]"
-                      dataType="decimal"
-                      name="ACTUALRUNLABOR"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STANCALCRATIO]"
-                      dataType="decimal"
-                      name="STANCALCRATIO"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[REQUESTEDQTY]"
-                      dataType="decimal"
-                      name="REQUESTEDQTY" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[SHIPQTY]"
-                      dataType="decimal"
-                      name="SHIPQTY" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;PlannedRunLabor&quot;]"
-                      dataType="decimal"
-                      name="&quot;PlannedRunLabor&quot;"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[&quot;PlannedRunMachine&quot;]"
-                      dataType="decimal"
-                      name="&quot;PlannedRunMachine&quot;"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[WOHRS]"
-                      dataType="decimal"
-                      name="WOHRS"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[ACTHRS]"
-                      dataType="decimal"
-                      name="ACTHRS"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STDHRS]"
-                      dataType="decimal"
-                      name="STDHRS"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output].ExternalColumns[STDCOMHRS]"
-                      dataType="decimal"
-                      name="STDCOMHRS"
-                      scale="2" />
-                  </externalMetadataColumns>
-                </output>
-                <output
-                  refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output]"
-                  isErrorOut="true"
-                  name="OLE DB Source Error Output">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;OpsDate&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      length="10"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;OpsDate&quot;]"
-                      name="&quot;OpsDate&quot;" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;WorkCenter&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;WorkCenter&quot;]"
-                      name="&quot;WorkCenter&quot;" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;WorkCenterDesc&quot;]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;WorkCenterDesc&quot;]"
-                      name="&quot;WorkCenterDesc&quot;" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;OrderNumber&quot;]"
-                      dataType="numeric"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;OrderNumber&quot;]"
-                      name="&quot;OrderNumber&quot;"
-                      precision="8" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[PARTNUMBER]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[PARTNUMBER]"
-                      name="PARTNUMBER" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;OPSSequence&quot;]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;OPSSequence&quot;]"
-                      name="&quot;OPSSequence&quot;"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[PARTDESC]"
-                      codePage="1252"
-                      dataType="str"
-                      length="61"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[PARTDESC]"
-                      name="PARTDESC" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[UNITOFMEASURE]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[UNITOFMEASURE]"
-                      name="UNITOFMEASURE" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANDARDSETUP]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANDARDSETUP]"
-                      name="STANDARDSETUP"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTUALSETUP]"
-                      dataType="numeric"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTUALSETUP]"
-                      name="ACTUALSETUP"
-                      precision="31"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANDARDRUNMACHINE]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANDARDRUNMACHINE]"
-                      name="STANDARDRUNMACHINE"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANDARDRUNLABOR]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANDARDRUNLABOR]"
-                      name="STANDARDRUNLABOR"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTUALRUNMACHINE]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTUALRUNMACHINE]"
-                      name="ACTUALRUNMACHINE"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTUALRUNLABOR]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTUALRUNLABOR]"
-                      name="ACTUALRUNLABOR"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANCALCRATIO]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STANCALCRATIO]"
-                      name="STANCALCRATIO"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[REQUESTEDQTY]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[REQUESTEDQTY]"
-                      name="REQUESTEDQTY" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[SHIPQTY]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[SHIPQTY]"
-                      name="SHIPQTY" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;PlannedRunLabor&quot;]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;PlannedRunLabor&quot;]"
-                      name="&quot;PlannedRunLabor&quot;"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;PlannedRunMachine&quot;]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[&quot;PlannedRunMachine&quot;]"
-                      name="&quot;PlannedRunMachine&quot;"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[WOHRS]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[WOHRS]"
-                      name="WOHRS"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTHRS]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ACTHRS]"
-                      name="ACTHRS"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STDHRS]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STDHRS]"
-                      name="STDHRS"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STDCOMHRS]"
-                      dataType="decimal"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[STDCOMHRS]"
-                      name="STDCOMHRS"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
             <component
               refId="Package\New Work Order Hours\OLE DB Destination"
               componentClassID="Microsoft.OLEDBDestination"
@@ -917,7 +79,7 @@ GROUP BY
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset"></property>
+                  name="OpenRowset">[dbo].[WorkOrderHours]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -960,6 +122,8 @@ GROUP BY
               <connections>
                 <connection
                   refId="Package\New Work Order Hours\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ustull0036\apsreport.Finance.ssis]"
+                  connectionManagerRefId="Package.ConnectionManagers[ustull0036\apsreport.Finance.ssis]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -970,8 +134,300 @@ GROUP BY
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OPSDATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="OPSDATE"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OpsDate]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPSDATE]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ORDERNUMBER]"
+                      cachedDataType="numeric"
+                      cachedName="ORDERNUMBER"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORDERNUMBER]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BUSINESSUNIT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="BUSINESSUNIT"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BusinessUnit]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[BUSINESSUNIT]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WORKCENTER]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="WORKCENTER"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkCenter]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WORKCENTER]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WORKCENTERDESC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="WORKCENTERDESC"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkCenterDesc]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WORKCENTERDESC]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ITEM]"
+                      cachedDataType="numeric"
+                      cachedName="ITEM"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Item]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ITEM]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PARTNUMBER]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PARTNUMBER"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PartNumber]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARTNUMBER]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OPSEQ]"
+                      cachedDataType="numeric"
+                      cachedName="OPSEQ"
+                      cachedPrecision="31"
+                      cachedScale="26"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OpSeq]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPSEQ]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TIMEBASE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="TIMEBASE"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TimeBase]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[TIMEBASE]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WO_HRS]"
+                      cachedDataType="decimal"
+                      cachedName="WO_HRS"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WO_Hrs]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WO_HRS]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ACT_HRS]"
+                      cachedDataType="decimal"
+                      cachedName="ACT_HRS"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACT_Hrs]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACT_HRS]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RUNMACH]"
+                      cachedDataType="decimal"
+                      cachedName="RUNMACH"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunMach]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUNMACH]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RUNLAB]"
+                      cachedDataType="decimal"
+                      cachedName="RUNLAB"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunLab]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUNLAB]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SETUP]"
+                      cachedDataType="decimal"
+                      cachedName="SETUP"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SetUp]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SETUP]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[STANDARD_HRS]"
+                      cachedDataType="numeric"
+                      cachedName="STANDARD_HRS"
+                      cachedPrecision="31"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Standard_Hrs]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[STANDARD_HRS]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[STDCOM_HRS]"
+                      cachedDataType="numeric"
+                      cachedName="STDCOM_HRS"
+                      cachedPrecision="31"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StdCom_Hrs]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[STDCOM_HRS]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LOADDATE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="LOADDATE"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOADDATE]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SRP1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SRP1"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SRP1]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SRP1]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SRP4]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SRP4"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SRP4]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SRP4]" />
+                    <inputColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PRP4]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="PRP4"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRP4]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[PRP4]" />
+                  </inputColumns>
                   <externalMetadataColumns
-                    isUsed="True" />
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OpsDate]"
+                      dataType="dbDate"
+                      name="OpsDate" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                      dataType="numeric"
+                      name="OrderNumber"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BusinessUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="BusinessUnit" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkCenter]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="WorkCenter" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkCenterDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="WorkCenterDesc" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkCenterType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="WorkCenterType" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Item]"
+                      dataType="numeric"
+                      name="Item"
+                      precision="8" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PartNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PartNumber" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OpSeq]"
+                      dataType="numeric"
+                      name="OpSeq"
+                      precision="5" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TimeBase]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="TimeBase" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WO_Hrs]"
+                      dataType="numeric"
+                      name="WO_Hrs"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ACT_Hrs]"
+                      dataType="numeric"
+                      name="ACT_Hrs"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunMach]"
+                      dataType="numeric"
+                      name="RunMach"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RunLab]"
+                      dataType="numeric"
+                      name="RunLab"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SetUp]"
+                      dataType="numeric"
+                      name="SetUp"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Standard_Hrs]"
+                      dataType="numeric"
+                      name="Standard_Hrs"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StdCom_Hrs]"
+                      dataType="numeric"
+                      name="StdCom_Hrs"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                      dataType="dbTimeStamp"
+                      name="LoadDate" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SRP1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SRP1" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SRP4" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="PRP4" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CrewSize]"
+                      dataType="numeric"
+                      name="CrewSize"
+                      precision="4" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Department]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8"
+                      name="Department" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DepartmentDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="DepartmentDesc" />
+                  </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
@@ -999,491 +455,12 @@ GROUP BY
                 </output>
               </outputs>
             </component>
-          </components>
-          <paths>
-            <path
-              refId="Package\New Work Order Hours.Paths[OLE DB Source Output]"
-              endId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input]"
-              name="OLE DB Source Output"
-              startId="Package\New Work Order Hours\JDE.Outputs[OLE DB Source Output]" />
-          </paths>
-        </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Old Work Order Hours"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{481963AD-6FC2-42E4-8420-C20BEBB6AE93}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Old Work Order Hours"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1">
-          <components>
             <component
-              refId="Package\Old Work Order Hours\APS Report"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="APS Report"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[WorkOrder_Hours]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">0</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Old Work Order Hours\APS Report.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[ustull0036\apsreport.Finance.ssis]"
-                  connectionManagerRefId="Package.ConnectionManagers[ustull0036\apsreport.Finance.ssis]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLDOCO]"
-                      cachedDataType="numeric"
-                      cachedName="WLDOCO"
-                      cachedPrecision="8"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDOCO]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDOCO]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLDCTO]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="2"
-                      cachedName="WLDCTO"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDCTO]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDCTO]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLMMCU]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="WLMMCU"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMMCU]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLMMCU]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WASRST]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="2"
-                      cachedName="WASRST"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WASRST]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WASRST]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLKIT]"
-                      cachedDataType="numeric"
-                      cachedName="WLKIT"
-                      cachedPrecision="8"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKIT]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLKIT]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLKITL]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="25"
-                      cachedName="WLKITL"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKITL]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLKITL]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[IMDSC1]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="30"
-                      cachedName="IMDSC1"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC1]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC1]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[IMDSC2]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="30"
-                      cachedName="IMDSC2"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC2]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC2]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[IMSRP1]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="3"
-                      cachedName="IMSRP1"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP1]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP1]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[IMPRP4]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="3"
-                      cachedName="IMPRP4"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMPRP4]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMPRP4]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[IMSRP4]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="3"
-                      cachedName="IMSRP4"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP4]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP4]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[OPSEQ]"
-                      cachedDataType="numeric"
-                      cachedName="OPSEQ"
-                      cachedPrecision="31"
-                      cachedScale="26"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSEQ]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[OPSEQ]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLOPST]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="2"
-                      cachedName="WLOPST"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLOPST]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLOPST]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLMCU]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="12"
-                      cachedName="WLMCU"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMCU]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLMCU]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLDSC1]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="30"
-                      cachedName="WLDSC1"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDSC1]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDSC1]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLUORG]"
-                      cachedDataType="decimal"
-                      cachedName="WLUORG"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLUORG]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLUORG]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLSOQS]"
-                      cachedDataType="decimal"
-                      cachedName="WLSOQS"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLSOQS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLSOQS]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WOHRS]"
-                      cachedDataType="decimal"
-                      cachedName="WOHRS"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WOHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WOHRS]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[ACTHRS]"
-                      cachedDataType="decimal"
-                      cachedName="ACTHRS"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[ACTHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[ACTHRS]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[RUNMACH]"
-                      cachedDataType="decimal"
-                      cachedName="RUNMACH"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNMACH]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[RUNMACH]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[RUNLAB]"
-                      cachedDataType="decimal"
-                      cachedName="RUNLAB"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNLAB]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[RUNLAB]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[IRTIMB]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="1"
-                      cachedName="IRTIMB"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTIMB]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IRTIMB]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[SETUP]"
-                      cachedDataType="decimal"
-                      cachedName="SETUP"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[SETUP]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[SETUP]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[STDHRS]"
-                      cachedDataType="numeric"
-                      cachedName="STDHRS"
-                      cachedPrecision="31"
-                      cachedScale="6"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[STDHRS]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[STDCOMHRS]"
-                      cachedDataType="numeric"
-                      cachedName="STDCOMHRS"
-                      cachedPrecision="31"
-                      cachedScale="6"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDCOMHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[STDCOMHRS]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[WLSTRX]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="10"
-                      cachedName="WLSTRX"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSDATE]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLSTRX]" />
-                    <inputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].Columns[IRTRT]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="3"
-                      cachedName="IRTRT"
-                      externalMetadataColumnId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTRT]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IRTRT]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[ROW_ID]"
-                      dataType="i4"
-                      name="ROW_ID" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDOCO]"
-                      dataType="cy"
-                      name="WLDOCO" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDCTO]"
-                      codePage="1252"
-                      dataType="str"
-                      length="2"
-                      name="WLDCTO" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMMCU]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="WLMMCU" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WASRST]"
-                      codePage="1252"
-                      dataType="str"
-                      length="2"
-                      name="WASRST" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKIT]"
-                      dataType="cy"
-                      name="WLKIT" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLKITL]"
-                      codePage="1252"
-                      dataType="str"
-                      length="25"
-                      name="WLKITL" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="IMDSC1" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMDSC2]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="IMDSC2" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="IMSRP1" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMPRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="IMPRP4" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IMSRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="IMSRP4" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSEQ]"
-                      dataType="cy"
-                      name="OPSEQ" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLOPST]"
-                      codePage="1252"
-                      dataType="str"
-                      length="2"
-                      name="WLOPST" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[OPSDATE]"
-                      dataType="dbDate"
-                      name="OPSDATE" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLMCU]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="WLMCU" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="WLDSC1" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLUORG]"
-                      dataType="cy"
-                      name="WLUORG" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WLSOQS]"
-                      dataType="cy"
-                      name="WLSOQS" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WOHRS]"
-                      dataType="cy"
-                      name="WOHRS" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[ACTHRS]"
-                      dataType="cy"
-                      name="ACTHRS" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTRT]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="IRTRT" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNMACH]"
-                      dataType="cy"
-                      name="RUNMACH" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[RUNLAB]"
-                      dataType="cy"
-                      name="RUNLAB" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[IRTIMB]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      name="IRTIMB" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[SETUP]"
-                      dataType="cy"
-                      name="SETUP" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDHRS]"
-                      dataType="cy"
-                      name="STDHRS" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[STDCOMHRS]"
-                      dataType="cy"
-                      name="STDCOMHRS" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input].ExternalColumns[WCTYPE]"
-                      codePage="1252"
-                      dataType="str"
-                      length="8"
-                      name="WCTYPE" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Old Work Order Hours\APS Report.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Old Work Order Hours\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Old Work Order Hours\APS Report.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Old Work Order Hours\SAMSON"
+              refId="Package\New Work Order Hours\OLE DB Source"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="SAMSON"
+              name="OLE DB Source"
               usesDispositions="true"
               version="7">
               <properties>
@@ -1503,244 +480,201 @@ GROUP BY
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
-	DISTINCT qgpl.cd(WLSTRX) AS wlstrx,
-	wldoco,
-	wldcto,
-	Wlmmcu,
-	wasrst,
-	wlkit,
-	wlkitl,
-	imdsc1,
-	imdsc2,
-	imsrp1,
-	imprp4,
-	imsrp4,
-	wlopsq / 100 AS OpSeq,
-	Wlopst,
-	trim(wlmcu) as wlmcu,
-	wldsc1,
-	wluorg,
-	wlsoqs,
-                   irtrt,
-	(
-		wlrunm + wlrunl
-	)*.01 AS WOHRS,
-	(
-		wlmaca + wllaba
-	)*.01 AS ACTHRS,
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+X.OPSDATE,
+X.ORDERNUMBER,
+X.BUSINESSUNIT,
+X.WORKCENTER,
+X.WORKCENTER_DESC AS WORKCENTERDESC,
+X.ITEM,
+X.PARTNUMBER,
+X.OPSEQ,
+IFNULL(X.TIMEBASE,'') AS TIMEBASE,
+X.PLANNED_MACHINE + X.PLANNED_LABOR AS WO_HRS,
+X.ACTUAL_MACHINE + X.ACTUAL_LABOR AS ACT_HRS,
+IFNULL (X.RUNMACH,0) AS RUNMACH,
+IFNULL (X.RUNLAB,0) AS RUNLAB,
+IFNULL (X.SETUP,0) AS SETUP,
+IFNULL ((X.RUNMACH + X.RUNLAB)*X.REQQTY *
 
- irrunm *.01 AS RunMach,
-	irrunl *.01 AS RunLab,
-	irtimb AS IRTIMB,
-	irsetl *.01 AS setup,
-	(
-		(
-			irrunm + irrunl
-		)*(
-			WLuorg *.01
-		)
-	)* CASE
-		WHEN irtimb = 'U' THEN 1
-		WHEN irtimb = '1' THEN.1
-		WHEN irtimb = '2' THEN.01
-		WHEN irtimb = '3' THEN.001
-		WHEN irtimb = '4' THEN.0001
-	END AS STDHRS,
-	(
-		(
-			irrunm + irrunl
-		)*(
-			WLsoqs *.01
-		)
-	)* CASE
-		WHEN irtimb = 'U' THEN 1
-		WHEN irtimb = '1' THEN.1
-		WHEN irtimb = '2' THEN.01
-		WHEN irtimb = '3' THEN.001
-		WHEN irtimb = '4' THEN.0001
-	END AS StdComHrs,
-	imsrp5
+
+(CASE
+	WHEN X.TIMEBASE = 'U' THEN 1
+	WHEN X.TIMEBASE = '1' THEN .1
+	WHEN X.TIMEBASE = '2' THEN .01
+	WHEN X.TIMEBASE = '3' THEN .001
+	WHEN X.TIMEBASE = '4' THEN .0001 END),0) AS STANDARD_HRS,
+
+
+IFNULL ((X.RUNMACH + X.RUNLAB)*X.SHIPQTY *
+
+
+(CASE
+	WHEN X.TIMEBASE = 'U' THEN 1
+	WHEN X.TIMEBASE = '1' THEN .1
+	WHEN X.TIMEBASE = '2' THEN .01
+	WHEN X.TIMEBASE = '3' THEN .001
+	WHEN X.TIMEBASE = '4' THEN .0001 END),0) AS STDCOM_HRS,
+	
+CURRENT_DATE  AS LoadDate,	
+
+x.SRP1,
+X.SRP4,
+X.PRP4
+
+
 FROM
-	amsdta.F3112LA
-LEFT JOIN amsdta.F30008 ON
-	iwmcu = WLMCU
-LEFT JOIN amsdta.F3003LA ON
-	irkit = WLKIT
-	AND iropsq = WLOPSQ
-	AND irmcu = WLMCU
-	AND WLNXOP = irnxop
-	AND irtrt = WLTRT
-LEFT JOIN amsdta.f4801 ON
-	wadoco = WLDOCO
-LEFT JOIN amsdta.F4101 ON
-	imitm = WLKIT
-WHERE
-	WLSTRX &gt;=  ( 
+(
+SELECT
+
+QGPL.CD(WLSTRX) AS OPSDATE,
+WLDOCO AS ORDERNUMBER,
+WLMMCU AS BUSINESSUNIT,
+TRIM(WLMCU) AS WORKCENTER,
+WLDSC1 AS WORKCENTER_DESC,
+WLKIT AS ITEM,
+WLKITL AS PARTNUMBER,
+WLOPSQ/100 AS OPSEQ,
+IRTIMB AS TIMEBASE,
+WLLABA *.01 AS ACTUAL_LABOR,
+WLMACA *.01 AS ACTUAL_MACHINE,
+WLRUNL *.01 AS PLANNED_LABOR,
+WLRUNM *.01 AS PLANNED_MACHINE,
+IRRUNM *.01 AS RUNMACH,
+IRRUNL *.01 AS RUNLAB,
+IRSETL*.01 AS SETUP,
+WLSETC*.01 AS CREWSIZE,
+WLSOCN AS SCRAP,
+WLSOQS AS SHIPQTY,
+WLUORG AS REQQTY,
+IMSRP1 AS SRP1,
+IMSRP4 AS SRP4,
+IMPRP4 AS PRP4
+
+
+
+FROM AMSDTA.F3112LA 
+	LEFT JOIN AMSDTA.F3003LC 
+		ON WLMMCU = IRMMCU
+			AND WLMCU = IRMCU
+				AND WLKIT = IRKIT
+					AND WLOPSQ = IROPSQ
+						--AND WLTIMB = IRTIMB
+							AND WLTRT = IRTRT
+	LEFT JOIN 	AMSDTA.F4101 
+		ON IMITM = WLKIT
+			AND IMLITM = WLKITL 
+WHERE 							
+WLSTRX &gt;= 
+( 
 	(substr(year(current date - 6 DAYS),2,1)+1) || 
 	substr(year(current date - 6 DAYS),3,2) || 
 	(CASE 	WHEN dayofyear(current date - 6 DAYS) &gt; 99 THEN ('' || dayofyear(current date - 6 DAYS))
 	 	WHEN dayofyear(current date - 6 DAYS) &gt; '9'   THEN ('0' || dayofyear(current date - 6 DAYS))
 		ELSE ('00' || dayofyear(current date - 6 DAYS))
 	END )
-)
-	AND TRIM( WLMCU ) IN(
-		'52003',
-		'52004',
-		'52005',
-		'52006',
-		'92003',
-		'53001',
-		'53002',
-		'53002C',
-		'53003',
-		'53004',
-		'93001',
-		'93002',
-		'93003',
-		'53011',
-		'54011',
-		'54012',
-		'54013',
-		'54014',
-		'54017',
-		'54017A',
-		'54017B',
-		'54017C',
-		'54018',
-		'54018A',
-		'54018B',
-		'54018C',
-		'54020',
-		'54021',
-		'54022',
-		'54023',
-		'54024',
-		'54025',
-		'54026',
-		'94013',
-		'94014',
-		'94017',
-		'94021',
-		'54019',
-		'55001',
-		'55002',
-		'55003',
-		'55004',
-		'55005',
-		'55006',
-		'55007',
-		'55008',
-		'55010',
-		'55011',
-		'55012',
-		'55099',
-		'95502',
-		'95002',
-		'55501',
-		'55502',
-		'55503',
-		'55504',
-		'55505',
-		'55506',
-		'55511',
-		'56001',
-		'56002',
-		'56003',
-		'56003A',
-		'56004',
-		'56005',
-		'56006',
-		'56007',
-		'56008',
-		'56009',
-		'96001',
-		'96003',
-		'96004',
-		'96005',
-		'56577',
-		'56578',
-		'56579',
-		'58001',
-		'58090',
-		'58091',
-		'58092',
-		'58094',
-		'58095',
-		'58096',
-		'58097',
-		'58098',
-		'58099',
-		'98090',
-		'98091',
-		'59501',
-		'59502',
-		'59503',
-		'59504',
-		'59505',
-		'59506',
-		'59507',
-		'59508',
-		'59509',
-		'59510',
-		'59511',
-		'99503',
-		'99504',
-		'99505',
-		'57001',
-		'57002',
-		'57003',
-		'57004',
-		'57005',
-		'57006',
-		'57007',
-		'97001',
-		'97002',
-		'97003',
-		'97004',
-		'57601',
-		'57602',
-		'57603',
-		'57604',
-		'57605',
-		'57606',
-		'57607',
-		'97601',
-		'97602',
-		'97603',
-		'97607',
-		'57301',
-		'57701',
-		'57702',
-		'57703',
-		'97702',
-		'58002',
-		'58003',
-		'58004',
-		'58005',
-		'58006',
-		'58011',
-		'58012',
-		'98001',
-		'98002',
-		'98004',
-		'98011',
-		'98012',
-		'51101',
-		'20101',
-		'59777',
-		'70077',
-		'41077',
-		'42077',
-		'43077',
-		'67177',
-		'67377',
-		'67477',
-		'67577',
-		'67677',
-		'67777',
-		'67877'
-	)</property>
+)							
+
+AND 	 TRIM( wlmcu ) IN ( '20101',
+'43077',
+'51101',
+'52003',
+'52003C',
+'52004',
+'52004C',
+'52005',
+'52005C',
+'53001',
+'53001C',
+'53002',
+'53003',
+'53004',
+'54012',
+'54013',
+'54014',
+'54017A',
+'54017B',
+'54017C',
+'54018A',
+'54018B',
+'54018C',
+'54020',
+'54022',
+'54024',
+'54025',
+'54027',
+'55001',
+'55002',
+'55003',
+'55004',
+'55007',
+'55008',
+'55502',
+'55503',
+'55505',
+'55506',
+'55511',
+'56001',
+'56002',
+'56003',
+'56003A',
+'56004',
+'56005',
+'56006',
+'56007',
+'56577',
+'56579',
+'57001',
+'57002',
+'57003',
+'57005',
+'57006',
+'57007',
+'57301',
+'57302',
+'57303',
+'57304',
+'57305',
+'57306',
+'57401',
+'57601',
+'57602',
+'57603',
+'57606',
+'57607',
+'58001',
+'58002',
+'58003',
+'58004',
+'58006',
+'58011',
+'58012',
+'58090',
+'58091',
+'58092',
+'58094',
+'58095',
+'58096',
+'58099',
+'59501',
+'59502',
+'59503',
+'59505',
+'59506',
+'59511',
+'67577',
+'67777',
+'97602',
+'97607',
+'42077',
+'56009',
+'57308',
+'58089',
+'59504',
+'67377',
+'67477',
+'53002C'
+ ) ) X</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1765,7 +699,7 @@ WHERE
               </properties>
               <connections>
                 <connection
-                  refId="Package\Old Work Order Hours\SAMSON.Connections[OleDbConnection]"
+                  refId="Package\New Work Order Hours\OLE DB Source.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[samson.S1049ZKM.apache]"
                   connectionManagerRefId="Package.ConnectionManagers[samson.S1049ZKM.apache]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1773,668 +707,488 @@ WHERE
               </connections>
               <outputs>
                 <output
-                  refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output]"
+                  refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLSTRX]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPSDATE]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSTRX]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPSDATE]"
                       length="10"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLSTRX]"
-                      name="WLSTRX"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPSDATE]"
+                      name="OPSDATE"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDOCO]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORDERNUMBER]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDOCO]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDOCO]"
-                      name="WLDOCO"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ORDERNUMBER]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ORDERNUMBER]"
+                      name="ORDERNUMBER"
                       precision="8"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDCTO]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[BUSINESSUNIT]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDCTO]"
-                      length="2"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDCTO]"
-                      name="WLDCTO"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLMMCU]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMMCU]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BUSINESSUNIT]"
                       length="12"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLMMCU]"
-                      name="WLMMCU"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[BUSINESSUNIT]"
+                      name="BUSINESSUNIT"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WASRST]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WORKCENTER]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WASRST]"
-                      length="2"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WASRST]"
-                      name="WASRST"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WORKCENTER]"
+                      length="12"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WORKCENTER]"
+                      name="WORKCENTER"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLKIT]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WORKCENTERDESC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WORKCENTERDESC]"
+                      length="30"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WORKCENTERDESC]"
+                      name="WORKCENTERDESC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ITEM]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKIT]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLKIT]"
-                      name="WLKIT"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ITEM]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ITEM]"
+                      name="ITEM"
                       precision="8"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLKITL]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARTNUMBER]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKITL]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PARTNUMBER]"
                       length="25"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLKITL]"
-                      name="WLKITL"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[PARTNUMBER]"
+                      name="PARTNUMBER"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC1]"
-                      length="30"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC1]"
-                      name="IMDSC1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC2]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC2]"
-                      length="30"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMDSC2]"
-                      name="IMDSC2"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP1]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP1]"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP1]"
-                      name="IMSRP1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMPRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMPRP4]"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMPRP4]"
-                      name="IMPRP4"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP4]"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP4]"
-                      name="IMSRP4"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[OPSEQ]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPSEQ]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[OPSEQ]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[OPSEQ]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPSEQ]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPSEQ]"
                       name="OPSEQ"
                       precision="31"
                       scale="26"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLOPST]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[TIMEBASE]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLOPST]"
-                      length="2"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLOPST]"
-                      name="WLOPST"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TIMEBASE]"
+                      length="1"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[TIMEBASE]"
+                      name="TIMEBASE"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLMCU]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMCU]"
-                      length="12"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLMCU]"
-                      name="WLMCU"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDSC1]"
-                      length="30"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLDSC1]"
-                      name="WLDSC1"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLUORG]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WO_HRS]"
                       dataType="decimal"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLUORG]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLUORG]"
-                      name="WLUORG"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLSOQS]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSOQS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WLSOQS]"
-                      name="WLSOQS"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WOHRS]"
-                      dataType="decimal"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WOHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[WOHRS]"
-                      name="WOHRS"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WO_HRS]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[WO_HRS]"
+                      name="WO_HRS"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[ACTHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACT_HRS]"
                       dataType="decimal"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[ACTHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[ACTHRS]"
-                      name="ACTHRS"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACT_HRS]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[ACT_HRS]"
+                      name="ACT_HRS"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[RUNMACH]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUNMACH]"
                       dataType="decimal"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNMACH]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[RUNMACH]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RUNMACH]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUNMACH]"
                       name="RUNMACH"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[RUNLAB]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUNLAB]"
                       dataType="decimal"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNLAB]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[RUNLAB]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RUNLAB]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[RUNLAB]"
                       name="RUNLAB"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IRTIMB]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTIMB]"
-                      length="1"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IRTIMB]"
-                      name="IRTIMB"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[SETUP]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SETUP]"
                       dataType="decimal"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[SETUP]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[SETUP]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SETUP]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SETUP]"
                       name="SETUP"
                       scale="2"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[STDHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[STANDARD_HRS]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[STDHRS]"
-                      name="STDHRS"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STANDARD_HRS]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[STANDARD_HRS]"
+                      name="STANDARD_HRS"
                       precision="31"
                       scale="6"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[STDCOMHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[STDCOM_HRS]"
                       dataType="numeric"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDCOMHRS]"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[STDCOMHRS]"
-                      name="STDCOMHRS"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STDCOM_HRS]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[STDCOM_HRS]"
+                      name="STDCOM_HRS"
                       precision="31"
                       scale="6"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP5]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOADDATE]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP5]"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IMSRP5]"
-                      name="IMSRP5"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LOADDATE]"
+                      length="10"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[LOADDATE]"
+                      name="LOADDATE"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IRTRT]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SRP1]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTRT]"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SRP1]"
                       length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].Columns[IRTRT]"
-                      name="IRTRT"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SRP1]"
+                      name="SRP1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SRP4]"
+                      length="3"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[SRP4]"
+                      name="SRP4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[PRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PRP4]"
+                      length="3"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].Columns[PRP4]"
+                      name="PRP4"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSTRX]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPSDATE]"
                       codePage="1252"
                       dataType="str"
                       length="10"
-                      name="WLSTRX" />
+                      name="OPSDATE" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDOCO]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ORDERNUMBER]"
                       dataType="numeric"
-                      name="WLDOCO"
+                      name="ORDERNUMBER"
                       precision="8" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDCTO]"
-                      codePage="1252"
-                      dataType="str"
-                      length="2"
-                      name="WLDCTO" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMMCU]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BUSINESSUNIT]"
                       codePage="1252"
                       dataType="str"
                       length="12"
-                      name="WLMMCU" />
+                      name="BUSINESSUNIT" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WASRST]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WORKCENTER]"
                       codePage="1252"
                       dataType="str"
-                      length="2"
-                      name="WASRST" />
+                      length="12"
+                      name="WORKCENTER" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKIT]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WORKCENTERDESC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="WORKCENTERDESC" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ITEM]"
                       dataType="numeric"
-                      name="WLKIT"
+                      name="ITEM"
                       precision="8" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLKITL]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PARTNUMBER]"
                       codePage="1252"
                       dataType="str"
                       length="25"
-                      name="WLKITL" />
+                      name="PARTNUMBER" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="IMDSC1" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMDSC2]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="IMDSC2" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="IMSRP1" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMPRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="IMPRP4" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      name="IMSRP4" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[OPSEQ]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPSEQ]"
                       dataType="numeric"
                       name="OPSEQ"
                       precision="31"
                       scale="26" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLOPST]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TIMEBASE]"
                       codePage="1252"
                       dataType="str"
-                      length="2"
-                      name="WLOPST" />
+                      length="1"
+                      name="TIMEBASE" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLMCU]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      name="WLMCU" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      name="WLDSC1" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLUORG]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[WO_HRS]"
                       dataType="decimal"
-                      name="WLUORG" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WLSOQS]"
-                      dataType="decimal"
-                      name="WLSOQS" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[WOHRS]"
-                      dataType="decimal"
-                      name="WOHRS"
+                      name="WO_HRS"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[ACTHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ACT_HRS]"
                       dataType="decimal"
-                      name="ACTHRS"
+                      name="ACT_HRS"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNMACH]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RUNMACH]"
                       dataType="decimal"
                       name="RUNMACH"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[RUNLAB]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RUNLAB]"
                       dataType="decimal"
                       name="RUNLAB"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTIMB]"
-                      codePage="1252"
-                      dataType="str"
-                      length="1"
-                      name="IRTIMB" />
-                    <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[SETUP]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SETUP]"
                       dataType="decimal"
                       name="SETUP"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STANDARD_HRS]"
                       dataType="numeric"
-                      name="STDHRS"
+                      name="STANDARD_HRS"
                       precision="31"
                       scale="6" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[STDCOMHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[STDCOM_HRS]"
                       dataType="numeric"
-                      name="STDCOMHRS"
+                      name="STDCOM_HRS"
                       precision="31"
                       scale="6" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IMSRP5]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LOADDATE]"
                       codePage="1252"
                       dataType="str"
-                      length="3"
-                      name="IMSRP5" />
+                      length="10"
+                      name="LOADDATE" />
                     <externalMetadataColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output].ExternalColumns[IRTRT]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SRP1]"
                       codePage="1252"
                       dataType="str"
                       length="3"
-                      name="IRTRT" />
+                      name="SRP1" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SRP4" />
+                    <externalMetadataColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="PRP4" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output]"
+                  refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSTRX]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPSDATE]"
                       codePage="1252"
                       dataType="str"
                       length="10"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSTRX]"
-                      name="WLSTRX" />
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPSDATE]"
+                      name="OPSDATE" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDOCO]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ORDERNUMBER]"
                       dataType="numeric"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDOCO]"
-                      name="WLDOCO"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ORDERNUMBER]"
+                      name="ORDERNUMBER"
                       precision="8" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDCTO]"
-                      codePage="1252"
-                      dataType="str"
-                      length="2"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDCTO]"
-                      name="WLDCTO" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMMCU]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BUSINESSUNIT]"
                       codePage="1252"
                       dataType="str"
                       length="12"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMMCU]"
-                      name="WLMMCU" />
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BUSINESSUNIT]"
+                      name="BUSINESSUNIT" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WASRST]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WORKCENTER]"
                       codePage="1252"
                       dataType="str"
-                      length="2"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WASRST]"
-                      name="WASRST" />
+                      length="12"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WORKCENTER]"
+                      name="WORKCENTER" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKIT]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WORKCENTERDESC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WORKCENTERDESC]"
+                      name="WORKCENTERDESC" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ITEM]"
                       dataType="numeric"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKIT]"
-                      name="WLKIT"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ITEM]"
+                      name="ITEM"
                       precision="8" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKITL]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PARTNUMBER]"
                       codePage="1252"
                       dataType="str"
                       length="25"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLKITL]"
-                      name="WLKITL" />
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PARTNUMBER]"
+                      name="PARTNUMBER" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC1]"
-                      name="IMDSC1" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC2]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMDSC2]"
-                      name="IMDSC2" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP1]"
-                      name="IMSRP1" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMPRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMPRP4]"
-                      name="IMPRP4" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP4]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP4]"
-                      name="IMSRP4" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[OPSEQ]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPSEQ]"
                       dataType="numeric"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[OPSEQ]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPSEQ]"
                       name="OPSEQ"
                       precision="31"
                       scale="26" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLOPST]"
-                      codePage="1252"
-                      dataType="str"
-                      length="2"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLOPST]"
-                      name="WLOPST" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMCU]"
-                      codePage="1252"
-                      dataType="str"
-                      length="12"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLMCU]"
-                      name="WLMCU" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDSC1]"
-                      codePage="1252"
-                      dataType="str"
-                      length="30"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLDSC1]"
-                      name="WLDSC1" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLUORG]"
-                      dataType="decimal"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLUORG]"
-                      name="WLUORG" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSOQS]"
-                      dataType="decimal"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WLSOQS]"
-                      name="WLSOQS" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTRT]"
-                      codePage="1252"
-                      dataType="str"
-                      length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTRT]"
-                      name="IRTRT" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WOHRS]"
-                      dataType="decimal"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[WOHRS]"
-                      name="WOHRS"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[ACTHRS]"
-                      dataType="decimal"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[ACTHRS]"
-                      name="ACTHRS"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNMACH]"
-                      dataType="decimal"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNMACH]"
-                      name="RUNMACH"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNLAB]"
-                      dataType="decimal"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[RUNLAB]"
-                      name="RUNLAB"
-                      scale="2" />
-                    <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTIMB]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TIMEBASE]"
                       codePage="1252"
                       dataType="str"
                       length="1"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IRTIMB]"
-                      name="IRTIMB" />
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TIMEBASE]"
+                      name="TIMEBASE" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[SETUP]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WO_HRS]"
                       dataType="decimal"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[SETUP]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[WO_HRS]"
+                      name="WO_HRS"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACT_HRS]"
+                      dataType="decimal"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ACT_HRS]"
+                      name="ACT_HRS"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RUNMACH]"
+                      dataType="decimal"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RUNMACH]"
+                      name="RUNMACH"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RUNLAB]"
+                      dataType="decimal"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RUNLAB]"
+                      name="RUNLAB"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SETUP]"
+                      dataType="decimal"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SETUP]"
                       name="SETUP"
                       scale="2" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STANDARD_HRS]"
                       dataType="numeric"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDHRS]"
-                      name="STDHRS"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STANDARD_HRS]"
+                      name="STANDARD_HRS"
                       precision="31"
                       scale="6" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDCOMHRS]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STDCOM_HRS]"
                       dataType="numeric"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[STDCOMHRS]"
-                      name="STDCOMHRS"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[STDCOM_HRS]"
+                      name="STDCOM_HRS"
                       precision="31"
                       scale="6" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP5]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LOADDATE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LOADDATE]"
+                      name="LOADDATE" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SRP1]"
                       codePage="1252"
                       dataType="str"
                       length="3"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[IMSRP5]"
-                      name="IMSRP5" />
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SRP1]"
+                      name="SRP1" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SRP4]"
+                      name="SRP4" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PRP4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PRP4]"
+                      name="PRP4" />
+                    <outputColumn
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2445,32 +1199,41 @@ WHERE
           </components>
           <paths>
             <path
-              refId="Package\Old Work Order Hours.Paths[OLE DB Source Output]"
-              endId="Package\Old Work Order Hours\APS Report.Inputs[OLE DB Destination Input]"
+              refId="Package\New Work Order Hours.Paths[OLE DB Source Output]"
+              endId="Package\New Work Order Hours\OLE DB Destination.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
-              startId="Package\Old Work Order Hours\SAMSON.Outputs[OLE DB Source Output]" />
+              startId="Package\New Work Order Hours\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Location"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{70AD1209-5FE7-4BBC-B730-8FB98B7F68DB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Location"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{248272E9-3553-4A8A-8F02-22F759EE4016}"
+          SQLTask:SqlStatementSource="&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;update WorkOrderHours   --table being updated&#xA;&#xA;set Department = t.DepartmentCode,&#xA;&#x9;DepartmentDesc = t.DepartmentDesc,&#xA;&#x9;CrewSize = t.PlannedCrewSize,&#xA;&#x9;WorkCenterType = t.WorkCenterType&#xA;    &#xA;       --column(s) being updated from the columns in other table that are updating&#xA;&#xA;from WorkOrderHours d&#x9; --table being updated&#xA;&#xA;inner join dimLocation t on t.WorkCenterNum = d.WorkCenter --join the tables&#xA;&#xA;where d.WorkCenter = t.WorkCenterNum    --constraints&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{B01F4195-6D7B-4735-97C1-EDC8DF3B17B7}"
-      DTS:From="Package\Old Work Order Hours"
+      DTS:DTSID="{9932B25E-5335-4D72-9ED0-5825DDEE538B}"
+      DTS:From="Package\New Work Order Hours"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint"
-      DTS:To="Package\Execute SQL Task" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
-      DTS:CreationName=""
-      DTS:DTSID="{CDAC50AB-F0DD-4A4A-AD46-D6D80CAEEA28}"
-      DTS:From="Package\Execute SQL Task"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 1"
-      DTS:To="Package\New Work Order Hours" />
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update Location" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2483,79 +1246,41 @@ WHERE
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="184,42"
-          Id="Package\Old Work Order Hours"
-          TopLeft="130,67" />
-        <NodeLayout
-          Size="163,42"
-          Id="Package\Execute SQL Task"
-          TopLeft="186,183" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="222,109">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="45.5,74"
-              Start="0,0"
-              End="45.5,66.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,33"
-                    Point2="0,37"
-                    Point3="4,37" />
-                  <mssgle:LineSegment
-                    End="41.5,37" />
-                  <mssgle:CubicBezierSegment
-                    Point1="41.5,37"
-                    Point2="45.5,37"
-                    Point3="45.5,41" />
-                  <mssgle:LineSegment
-                    End="45.5,66.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="189,42"
           Id="Package\New Work Order Hours"
           TopLeft="317,297" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Update Location"
+          TopLeft="536,403" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="267.5,225">
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="411.5,339">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="144,72"
+              EndConnector="202,64"
               Start="0,0"
-              End="144,64.5">
+              End="202,56.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32" />
+                    End="0,28" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,32"
-                    Point2="0,36"
-                    Point3="4,36" />
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
                   <mssgle:LineSegment
-                    End="140,36" />
+                    End="198,32" />
                   <mssgle:CubicBezierSegment
-                    Point1="140,36"
-                    Point2="144,36"
-                    Point3="144,40" />
+                    Point1="198,32"
+                    Point2="202,32"
+                    Point3="202,36" />
                   <mssgle:LineSegment
-                    End="144,64.5" />
+                    End="202,56.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2568,44 +1293,44 @@ WHERE
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Old Work Order Hours">
+    design-time-name="Package\New Work Order Hours">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="120,42"
-          Id="Package\Old Work Order Hours\SAMSON"
-          TopLeft="160,55" />
+          Size="150,42"
+          Id="Package\New Work Order Hours\OLE DB Source"
+          TopLeft="90,44" />
         <NodeLayout
-          Size="132,42"
-          Id="Package\Old Work Order Hours\APS Report"
-          TopLeft="326,172" />
+          Size="171,42"
+          Id="Package\New Work Order Hours\OLE DB Destination"
+          TopLeft="225,176" />
         <EdgeLayout
-          Id="Package\Old Work Order Hours.Paths[OLE DB Source Output]"
-          TopLeft="220,97">
+          Id="Package\New Work Order Hours.Paths[OLE DB Source Output]"
+          TopLeft="165,86">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="172,75"
+              EndConnector="145.5,90"
               Start="0,0"
-              End="172,67.5">
+              End="145.5,82.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.5" />
+                    End="0,41" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,33.5"
-                    Point2="0,37.5"
-                    Point3="4,37.5" />
+                    Point1="0,41"
+                    Point2="0,45"
+                    Point3="4,45" />
                   <mssgle:LineSegment
-                    End="168,37.5" />
+                    End="141.5,45" />
                   <mssgle:CubicBezierSegment
-                    Point1="168,37.5"
-                    Point2="172,37.5"
-                    Point3="172,41.5" />
+                    Point1="141.5,45"
+                    Point2="145.5,45"
+                    Point3="145.5,49" />
                   <mssgle:LineSegment
-                    End="172,67.5" />
+                    End="145.5,82.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2618,7 +1343,15 @@ WHERE
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Old Work Order Hours\APS Report">
+    design-time-name="Package\New Work Order Hours\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\New Work Order Hours\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2627,72 +1360,6 @@ WHERE
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Old Work Order Hours\SAMSON">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\New Work Order Hours">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="97,42"
-          Id="Package\New Work Order Hours\JDE"
-          TopLeft="73,48" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\New Work Order Hours\OLE DB Destination"
-          TopLeft="225,168" />
-        <EdgeLayout
-          Id="Package\New Work Order Hours.Paths[OLE DB Source Output]"
-          TopLeft="121.5,90">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="189,78"
-              Start="0,0"
-              End="189,70.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,35"
-                    Point2="0,39"
-                    Point3="4,39" />
-                  <mssgle:LineSegment
-                    End="185,39" />
-                  <mssgle:CubicBezierSegment
-                    Point1="185,39"
-                    Point2="189,39"
-                    Point3="189,43" />
-                  <mssgle:LineSegment
-                    End="189,70.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\New Work Order Hours\JDE">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
